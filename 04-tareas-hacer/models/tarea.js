@@ -10,7 +10,6 @@ class Tarea {
         this.id = uuid();
         this.desc = desc;
         this.completadoEn = null
-
     }
 }
 

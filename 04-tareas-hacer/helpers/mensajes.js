@@ -26,18 +26,13 @@ const mostrarMenu =  () => {
             readline.close();
             resolve(opt);
         }); 
-
-
     }));
-
-   
 
 }
 
 const pause = () =>{
 
     return new Promise( resolve =>{
-
         const readline = require('readline').createInterface({
             input: process.stdin,
             output: process.stdout
@@ -47,15 +42,8 @@ const pause = () =>{
             readline.close();
             resolve();
         });
-    
-
     })
-
-   
 }
-
-
-
 
 
 module.exports = {
