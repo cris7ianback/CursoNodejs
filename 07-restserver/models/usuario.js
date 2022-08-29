@@ -5,7 +5,7 @@ const { Schema, model } = pkg
 const UsuarioSchema = Schema({
     nombre: {
         type: String,
-        required: [true, 'El nombre es Obligatorio']
+        required: [true, 'El nombre es obligatorio']
     },
     correo: {
         type: String,
@@ -37,5 +37,12 @@ const UsuarioSchema = Schema({
     }
 
 });
+
+UsuarioSchema.methods.toJSON = function (){
+    const { __v, password, ...usuario } = this.toObject();
+    return usuario;
+
+
+}
 
 export default model('Usuario', UsuarioSchema);
