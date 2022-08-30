@@ -1,12 +1,13 @@
 import pkg from 'mongoose';
 
-const { Schema, model } = pkg 
+const { Schema, model } = pkg
 
 const UsuarioSchema = Schema({
     nombre: {
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
+
     correo: {
         type: String,
         required: [true, ' El correo es obligatorio'],
@@ -16,17 +17,14 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, 'El password es Obligatorio']
     },
-
     img: {
         type: String,
     },
-
     rol: {
         type: String,
         required: true,
         emun: [' ADMIN_ROLE', 'USER_ROLE']
     },
-
     estado: {
         type: Boolean,
         default: true
@@ -38,10 +36,10 @@ const UsuarioSchema = Schema({
 
 });
 
-UsuarioSchema.methods.toJSON = function (){
-    const { __v, password, ...usuario } = this.toObject();
+UsuarioSchema.methods.toJSON = function () {
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
     return usuario;
-
 
 }
 
