@@ -15,7 +15,7 @@ const generarJWT = (uid = '') => {
             } else {
                 resolve(token);
             }
-        });
+        })
     })
 }
 

@@ -3,7 +3,12 @@ import { check } from "express-validator";
 import { usuarioDelete, usuarioGet, usuarioPatch, usuarioPost, usuarioPut } from "../controllers/usuario.controller.js";
 
 import { esEmailValido, esRoleValido, existeUsuarioPorId } from "../helpers/db-validators.js";
-import { validarCampos, validarJWT, esAdminRole, tieneRole } from "../middlewares/index.js";
+
+import { validarCampos } from "../middlewares/validar-campos.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
+import { esAdminRole } from "../middlewares/validar-roles.js";
+import { tieneRole } from "../middlewares/validar-roles.js";
+
 export const router = Router();
 
 router.delete("/:id", [
