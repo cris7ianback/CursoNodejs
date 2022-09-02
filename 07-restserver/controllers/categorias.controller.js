@@ -1,5 +1,4 @@
 import { response } from "express";
-// import Categoria from "../models/categoria.js";
 import Categoria from "../models/index.js";
 
 
@@ -11,7 +10,7 @@ const actualizarCategoria = async (req, res = response) => {
     data.nombre = data.nombre.toUpperCase();
     data.usuario = req.usuario._id
 
-    const categoria = await Categoria.Categoria.findByIdAndUpdate(id, data, {new: true});
+    const categoria = await Categoria.Categoria.findByIdAndUpdate(id, data, { new: true });
 
     res.json(categoria);
 
@@ -21,7 +20,7 @@ const actualizarCategoria = async (req, res = response) => {
 const borrarCagetoria = async (req, res = response) => {
 
     const { id } = req.params;
-    const categoria = await Categoria.Categoria.findByIdAndUpdate(id, { estado: false });
+    const categoria = await Categoria.Categoria.findByIdAndUpdate(id, { estado: false }, { new: true });
     res.json(categoria)
 
 }
@@ -31,6 +30,7 @@ const crearCategoria = async (req, res = response) => {
 
     const nombre = req.body.nombre.toUpperCase();
     const categoriaDB = await Categoria.Categoria.findOne({ nombre });
+    console.log(categoriaDB)
 
 
     if (categoriaDB) {
@@ -45,8 +45,6 @@ const crearCategoria = async (req, res = response) => {
         usuario: req.usuario._id
     }
 
-
-    console.log(data);
     const categoria = new Categoria(data);
 
     // Guardar DB

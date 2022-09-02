@@ -1,4 +1,5 @@
-import { response } from "express"
+
+import { response } from 'express';
 
 const esAdminRole = (req, res = response, next) => {
 
@@ -29,7 +30,7 @@ const tieneRole = (...roles) => {
 
         if ( !roles.includes( req.usuario.rol ) ) { }
         return res.status(401).json({
-            msg: `El servicio require uno de estos roles ${ roles }`
+            msg: `El servicio require uno de estos roles ${roles }`
         });
     }
 

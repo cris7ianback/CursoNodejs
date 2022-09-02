@@ -8,7 +8,7 @@ import {
         crearCategoria,
         obtenerCategoria } from "../controllers/categorias.controller.js";
 import { existeCategoriaId } from "../helpers/db-validators.js";
-
+import { esAdminRole } from "../middlewares/validar-roles.js";
 export const routerCategoria = Router();
 
 // Obtener todas las categorias - público
@@ -42,6 +42,7 @@ routerCategoria.put('/:id', [
 // Borrar una categoría - Admin
 routerCategoria.delete('/:id', [
     validarJWT,
+    esAdminRole,
     check("id", "No es un id válido").isMongoId(),
     check("id").custom(existeCategoriaId),
     validarCampos,
