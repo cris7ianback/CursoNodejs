@@ -2,29 +2,50 @@ import { response } from "express";
 import Producto from "../models/index.js";
 
 
-const actualizarProducto = async( req, res = response ) => {
+// const actualizarProducto = async( req, res = response ) => {
 
-    const { nombre } = req.params;
+//     const { id } = req.params;
+//     const { estado, usuario, ...data } = req.body;
+
+
+//     if( data.nombre ) {
+//         data.nombre  = data.nombre.toUpperCase();
+//     }
+
+//     data.usuario = req.usuario.id;
+
+//     const producto = await Producto.Producto.findByIdAndUpdate(id, data, { new: true });
+
+//     res.json( producto );
+
+// }
+
+const actualizarProducto = async (req, res = response) => {
+
+    const { id } = req.params;
     const { estado, usuario, ...data } = req.body;
-
-    console.log (nombre)
-
-    if( data.nombre ) {
-        data.nombre  = data.nombre.toUpperCase();
+    console.log(id)
+    if (data.nombre) {
+        data.nombre = data.nombre.toUpperCase();
     }
 
     data.usuario = req.usuario._id;
 
-    const producto = await Producto.Producto.findByIdAndUpdate(nombre, data, { new: true });
-
-    res.json( producto );
+    const productos = await Producto.Producto.findByIdAndUpdate(id, data, { new: true });
+    console.log(productos)
+    res.json(productos);
 
 }
 
-const borrarProducto = async (req, res = response) =>{
+
+
+
+
+
+const borrarProducto = async (req, res = response) => {
 
     const { id } = req.params;
-    const productoBorrado = await Producto.Producto.findOneAndUpdate (id, { estado : false}, {new: true})
+    const productoBorrado = await Producto.Producto.findOneAndUpdate(id, { estado: false }, { new: true })
 
     res.json(productoBorrado);
 
@@ -74,8 +95,8 @@ const obtenerProductos = async (req, res = response) => {
             .limit(Number(limite))
     ]);
 
-    
-    
+
+
     res.json({
         total,
         producto
@@ -83,15 +104,13 @@ const obtenerProductos = async (req, res = response) => {
 }
 
 const obtenerProducto = async (req, res = response) => {
-    const { _id } = req.params;
-    console.log(req.params)
-    const producto = await Producto.Producto.findById(_id)
+    const { id } = req.params;
+
+    const producto = await Producto.Producto.findById(id)
         .populate('usuario', 'nombre')
         .populate('categoria', 'nombre');
-        console.log(producto)
     res.json(producto);
 
-    console.log (res)
 }
 
 

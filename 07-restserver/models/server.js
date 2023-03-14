@@ -6,6 +6,8 @@ import { routerAuth } from '../routes/auth.routes.js'
 import { dbConnection } from '../database/config.js';
 import { routerCategoria } from '../routes/categorias.routes.js';
 import { routerProductos } from '../routes/productos.routes.js';
+import { routerBuscar}  from "../routes/buscar.routes.js"
+
 
 
 class Server {
@@ -16,13 +18,12 @@ class Server {
 
         this.paths ={
             authPath : '/api/auth',
+            buscarPath: '/api/buscar',
             categoriasPath: '/api/categorias',
             productosPath: '/api/productos',
-            usuariosPath: '/api/usuarios'
+            usuariosPath: '/api/usuarios',
         }
-        
-
-        
+                
         //conectar a base de datos
         this.conectarDB();
 
@@ -54,6 +55,7 @@ class Server {
         this.app.use(this.paths.categoriasPath, routerCategoria)
         this.app.use(this.paths.productosPath, routerProductos);
         this.app.use(this.paths.usuariosPath, router);
+        this.app.use(this.paths.buscarPath, routerBuscar);
 
     }
 

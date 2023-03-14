@@ -9,7 +9,7 @@ import Usuario from './usuario.js';
 
 
 
-export default {
+export default  {
 
     Categoria,
     Role,
